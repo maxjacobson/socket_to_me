@@ -2,8 +2,8 @@
 
 ## main resources
 
-* [http://www.html5rocks.com/en/tutorials/websockets/basics/](html5rocks websockets basics)
-* [https://github.com/igrigorik/em-websocket](em-websocket) ruby server that can make connections and communicate
+* <http://www.html5rocks.com/en/tutorials/websockets/basics/>
+* <https://github.com/igrigorik/em-websocket> em-websocket, ruby server that can make connections and communicate
 
 basically took the javascript example from the first one and the ruby example from the second one and connected them.
 
