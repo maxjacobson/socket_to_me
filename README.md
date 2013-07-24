@@ -7,7 +7,7 @@
 
 basically took the javascript example from the first one and the ruby example from the second one and connected them.
 
-* `gem install em-websocket populator`
+* `gem install em-websocket`
 * `ruby server.rb`
 * then open index.html in browser and click the button
 * check the browser console as well as the terminal you started the server from to see output
