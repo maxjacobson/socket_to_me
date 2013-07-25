@@ -8,6 +8,9 @@ ActiveRecord::Base.establish_connection(
 )
 
 class Sms < ActiveRecord::Base
+  def pretty_print
+    "#{body} from #{from_num[0..4]}-xxx-xxxx"
+  end
 end
 
 
@@ -28,7 +31,10 @@ EM.run do
       # puts handshake.query
       # puts handshake.query.inspect
       # puts handshake.parser.query_string.inspect
-      ws.send "Hello Client, you connected to #{handshake.path}"
+      # ws.send "Hello Client, you connected to #{handshake.path}"
+      Sms.all.each do |sms|
+        ws.send sms.pretty_print
+      end
     end
 
     ws.onclose { puts "Connection closed" }
@@ -36,7 +42,7 @@ EM.run do
     ws.onmessage do |msg|
       puts "Recieved message: #{msg}"
       last_text = Sms.last
-      ws.send "#{last_text.body} from #{last_text.from_num[0..4]}-xxx-xxxx"
+      ws.send last_text.pretty_print
     end
 
   end

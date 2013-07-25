@@ -16,7 +16,7 @@ $(document).ready(function() {
   // Log messages from the server
   connection.onmessage = function (response) {
     console.log('Server: ' + response.data);
-    if($(".sms_list li:first").text() == response.data) {
+    if($(".sms_list li:first").text() === response.data) {
       console.log("already seen it");
     } else {
       $("<li>" + response.data + "</li>").prependTo(".sms_list");
