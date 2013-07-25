@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   var connection = new WebSocket('ws://localhost:8081', ['soap', 'xmpp']);
-  // var connection = new WebSocket('ws://3euu.localtunnel.com', ['soap', 'xmpp']);
+  // var connection = new WebSocket('ws://4p2h.localtunnel.com', ['soap', 'xmpp']);
 
   // When the connection is open, send some data to the server
   connection.onopen = function () {
@@ -14,9 +14,14 @@ $(document).ready(function() {
   };
 
   // Log messages from the server
-  connection.onmessage = function (e) {
-    console.log('Server: ' + e.data);
-    $("<p>" + e.data + "</p>").appendTo("body");
+  connection.onmessage = function (response) {
+    console.log('Server: ' + response.data);
+    if($(".sms_list li:first").text() == response.data) {
+      console.log("already seen it");
+    } else {
+      $("<li>" + response.data + "</li>").prependTo(".sms_list");
+    }
+    
   };
 
   // ping the server every 5 seconds

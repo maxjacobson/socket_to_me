@@ -36,8 +36,7 @@ EM.run do
     ws.onmessage do |msg|
       puts "Recieved message: #{msg}"
       last_text = Sms.last
-      new_msg = "#{last_text.body} from #{last_text.from_num[0..4]}xxx-xxxx"
-      ws.send new_msg
+      ws.send "#{last_text.body} from #{last_text.from_num[0..4]}-xxx-xxxx"
     end
 
   end
