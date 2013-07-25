@@ -16,47 +16,29 @@ puts "listening..."
 # binding.pry
 
 EM.run do
-  EM::WebSocket.run(:host => "0.0.0.0", :port => 8080) do |ws|
+  EM::WebSocket.run(:host => "0.0.0.0", :port => 8081) do |ws|
 
 
     ws.onopen do |handshake|
       puts "WebSocket connection open"
 
-      # puts handshake.inspect
-      # puts ws.inspect
-      # puts ws.request.inspect
-      puts handshake.query_string
-      puts handshake.query
-      puts handshake.query.inspect
-      puts handshake.parser.query_string.inspect
-
-      # last_text = Sms.last
-      # puts last_text.body
-      # ws.send last_text.body
-
-      # loop do
-      #   if Sms.last.body != last_text.body
-      #     last_text = Sms.last
-      #     puts last_text.body
-      #     ws.send last_text.body
-      #   end
-      #   puts "looping..."
-      #   sleep 5
-      # end
-
-      # Access properties on the EM::WebSocket::Handshake object, e.g.
-      # path, query_string, origin, headers
-
-      # Publish message to the client
-      # ws.send "Hello Client, you connected to #{handshake.path}"
+      # things to inspect
+      # with theory: no need for sinatra app necessarily...
+      # puts handshake.query_string
+      # puts handshake.query
+      # puts handshake.query.inspect
+      # puts handshake.parser.query_string.inspect
+      ws.send "Hello Client, you connected to #{handshake.path}"
     end
 
     ws.onclose { puts "Connection closed" }
 
-    # ws.onmessage do |msg|
-    #   puts "Recieved message: #{msg}"
-    #   ws.send sentences.sample
-    # end
+    ws.onmessage do |msg|
+      puts "Recieved message: #{msg}"
+      last_text = Sms.last
+      new_msg = "#{last_text.body} from #{last_text.from_num[0..4]}xxx-xxxx"
+      ws.send new_msg
+    end
 
   end
 end

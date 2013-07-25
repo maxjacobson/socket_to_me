@@ -1,6 +1,8 @@
 # twilio notes
 
-* run ewb app locally
+so it kind of works
+
+
 
 * * *
 
