@@ -19,23 +19,30 @@ EM.run do
   EM::WebSocket.run(:host => "0.0.0.0", :port => 8080) do |ws|
 
 
-
     ws.onopen do |handshake|
       puts "WebSocket connection open"
 
-      last_text = Sms.last
-      puts last_text.body
-      ws.send last_text.body
+      # puts handshake.inspect
+      # puts ws.inspect
+      # puts ws.request.inspect
+      puts handshake.query_string
+      puts handshake.query
+      puts handshake.query.inspect
+      puts handshake.parser.query_string.inspect
 
-      loop do
-        if Sms.last.body != last_text.body
-          last_text = Sms.last
-          puts last_text.body
-          ws.send last_text.body
-        end
-        puts "looping..."
-        sleep 5
-      end
+      # last_text = Sms.last
+      # puts last_text.body
+      # ws.send last_text.body
+
+      # loop do
+      #   if Sms.last.body != last_text.body
+      #     last_text = Sms.last
+      #     puts last_text.body
+      #     ws.send last_text.body
+      #   end
+      #   puts "looping..."
+      #   sleep 5
+      # end
 
       # Access properties on the EM::WebSocket::Handshake object, e.g.
       # path, query_string, origin, headers
