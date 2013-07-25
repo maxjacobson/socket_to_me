@@ -1,3 +1,9 @@
+# twilio notes
+
+* run ewb app locally
+
+* * *
+
 # what i learned about sockets
 
 ## main resources
